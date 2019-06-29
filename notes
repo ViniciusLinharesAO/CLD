@@ -1,0 +1,14 @@
+data = {
+    n_entr = {
+        quant = 3,
+        entr = [Cin,A,B]
+    },
+    n_said = {
+        quant = 2,
+        entr = [S,Cout]
+    },
+    n_gate = {
+        quant = 5,
+        entr = [g1,g2,g3,g4,g5]
+    },
+}

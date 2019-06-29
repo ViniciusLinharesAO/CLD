@@ -1,0 +1,12 @@
+% Linhas iniciando com % são linhas de comentários.
+% Circuito 1 - Somador completo
+% Parte 1: dados quantitativos e ids do circuito.
+n_entr,3,Cin,A,B
+n_said,2,S,Cout
+n_gate,5,g1,g2,g3,g4,g5
+% Parte 2 da descrição: interconexões (ID do gate, tipo, saída, lista de entradas; yi é a saída do gate gi).
+g1,xor,y1,A,B
+g2,xor,S,y1,Cin
+g3,and,y3,y1,Cin
+g4,and,y4,y1,Cin
+g5,or,Cout,y3,y4
