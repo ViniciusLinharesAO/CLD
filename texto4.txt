@@ -1,0 +1,13 @@
+% Linhas iniciando com % são linhas de comentários.
+% Circuito 4
+% Parte 1: dados quantitativos e ids do circuito.
+n_entr,5,x1,x2,x3,x4,x5
+n_said,2,s0,s1
+n_gate,6,g1,g2,g3,g4,g5,g6
+% Parte 2 da descrição: interconexões (ID do gate, tipo, saída, lista de entradas; yi é a saída do gate gi).
+g1,nand,y1,x1,x3
+g2,nand,y2,x3,x4
+g3,nand,y3,x2,y2
+g4,nand,y4,y2,x5
+g5,nand,s0,y1,y3
+g6,nand,s1,y3,y4

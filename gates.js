@@ -1,5 +1,5 @@
 module.exports = { 
-    not (x) {return !x ? 1:0},
+    not (x,y) {return !x ? 1:0},
      and (x,y) {return x&y},
      or (x,y) {return x|y},
      xor (x,y) {return x^y},

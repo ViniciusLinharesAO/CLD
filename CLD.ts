@@ -16,7 +16,6 @@ function identificar(data) {
     return retorno;
 }
 
-//constantes
 let data = arquivo.ler();
 let agr =[];
 const n_entr = parseInt(data[0][1]);
