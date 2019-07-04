@@ -17,18 +17,22 @@ function identificar(data) {
 }
 
 //constantes
-let result = []
 let data = arquivo.ler();
+let agr =[];
 const n_entr = parseInt(data[0][1]);
 const n_said = parseInt(data[1][1]);
 const n_gate = parseInt(data[2][1]);
 const n_linh = 2**n_entr;
+let result = [];
+for (let i = 0; i < n_said; i++) result.push('');
 const gerado = generator.gerar(n_entr);
 for (let linh = 0; linh < n_linh; linh++) {
     let out = [];
-    for (let said = 0; said < n_gate; said++){out.push(-1)}
+    for (let said = 0; said < n_gate; said++) out.push(-1);
     let allIn = [];
     for (let i = 0; i < n_entr; i++) allIn.push(data[0][i+2]);
+    let allOut = [];
+    for (let i = 0; i < n_said; i++) allOut.push(data[1][i+2]);
     let gates = [];
     for (let i = 0; i < n_gate; i++) gates.push(data[i+3]);
     for (let gate = 0; gate < n_gate; gate++) {
@@ -44,36 +48,42 @@ for (let linh = 0; linh < n_linh; linh++) {
                 }
             }
             if (entr == 1 && isNumber(gates[gate][3]) && isNumber(gates[gate][4])) {
+                let index = allOut.indexOf(gates[gate][2]);
                 gates[gate][2] = resolver(gates[gate][1],gates[gate][3],gates[gate][4]);
-                out[gate] = gates[gate][2];
-                
-                let index = allIn.indexOf(gates[gate][entr+3]);
                 if(index != -1) {
-                    gates[gate][entr+3] = gerado[index][linh];
+                    result[index] = gates[gate][2];
                 }
-                
+                out[gate] = gates[gate][2];
             }
         }
     }
-    log(data)
-    log(out)
     out = [];
-    log(out)
     data = arquivo.ler();
+    agr.push(...result);
+    
 }
 
-/*
+let allIn = [];
+for (let i = 0; i < n_entr; i++) allIn.push(data[0][i+2]);
+let allOut = [];
+for (let i = 0; i < n_said; i++) allOut.push(data[1][i+2]);
 
-[ [ 'n_entr', '3', 'Cin', 'A', 'B' ],
-  [ 'n_said', '2', 'S', 'Cout' ],
-  [ 'n_gate', '5', 'g1', 'g2', 'g3', 'g4', 'g5' ],
-  [ 'g1', 'xor', 'y1', 'A', 'B' ],
-  [ 'g2', 'xor', 'S', 'y1', 'Cin' ],
-  [ 'g3', 'and', 'y3', 'y1', 'Cin' ],
-  [ 'g4', 'and', 'y4', 'y1', 'Cin' ],
-  [ 'g5', 'or', 'Cout', 'y3', 'y4' ] ]
+let tabela = 'Respectivamente\n';
+tabela += 'entradas: ';
+for (let i = 0; i < n_entr; i++) tabela += `${allIn[i]} `;
+tabela += '\n'
+tabela += 'saídas: ';
+for (let j = 0; j < n_said; j++) tabela += `${allOut[j]} `;
+tabela += '\n'
+for (let linh = 0; linh < n_linh; linh++) {
+    for (let i = 0; i < n_entr; i++) {
+        tabela += `${gerado[i][linh]} `
+    }
+    tabela += '|| '
+    for (let j = 0; j < n_said; j++) {
+        tabela += `${agr[j+linh]} `
+    }
+    tabela += '\n'
+}
 
-  arquivo.escrever(gerado.join('\n'));
-  for (let i = 0; i <= 100; i += 5) saida.splice(i, 0, '\n');
-
-*/
+arquivo.escrever(tabela);
